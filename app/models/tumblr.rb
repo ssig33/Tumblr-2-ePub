@@ -52,6 +52,7 @@ class Tumblr
   end
 
   def self.create_epub tumble
+    begin
     @photos = []
     @downloads = []
     pages = []
@@ -106,6 +107,8 @@ HTML
     filename = rand(256**16).to_s(16)
     e.save "public/#{filename}.epub"
     return "#{filename}.epub"
+    rescue
+    end
   end
 
   def self.process_post post
@@ -117,12 +120,13 @@ HTML
           begin
             e = Entity.find("pu/#{CGI.escape(u["content"])}")
             @photos << e.url
+            @text = "<div style='max-height:90%'><img src='#{e.url}.png' /></div>"
           rescue
             name = rand(256**16).to_s(16)
             @downloads << [name,u["content"]]
             @photos << name
+            @text = "<div style='max-height:90%'><img src='#{name}.png' /></div>"
           end
-          @text = "<div style='max-height:90%'><img src='#{name}.png' /></div>"
         end
       end
       return {:title => nil, :text => @text}
