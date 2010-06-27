@@ -118,11 +118,11 @@ HTML
             e = Entity.find("pu/#{CGI.escape(u["content"])}")
             @photos << e.url
           rescue
-            down = rand(256**16).to_s(16)
-            @text = "<div style='max-height:90%'><img src='#{down}.png' /></div>"
-            @downloads << [down,u["content"]]
-            @photos << down
+            name = rand(256**16).to_s(16)
+            @downloads << [name,u["content"]]
+            @photos << name
           end
+          @text = "<div style='max-height:90%'><img src='#{down}.png' /></div>"
         end
       end
       return {:title => nil, :text => @text}
