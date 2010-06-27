@@ -1,0 +1,20 @@
+== Tumblr 2 ePub
+Tumblr を ePub に変換します。 quote と text と photo のみ対応している。
+
+gem は memcache-client memcached json haml xmlsimple eeepub あたりが必要です。
+
+config/enviroment.rb の MEMCACHE_HOST と MEMCACHE_PREFIX を環境に合せて書換えてください。 config/database.yml は
+
+http://github.com/ssig33/SimpleResource
+
+あたりを見て適当に設定して下さい。
+
+Tumblr を ePub に変換するだけなら ./script/console から
+
+>>Tumblr.create_epub(Tumblr.get_posts "rikukoike", 200)
+
+とかやれば大丈夫です。 rikukoike のところに変換したい tumblr のサブドメイン、 2000 のところに取得したい件数を入れてください。
+
+Tumblr.created_epub は String を返却しますが、 public/#{Tumblr.create_epub の戻り値} というファイル名ノの ePub が作成されます。
+
+ソースを見てもらえば分かるかとは思いますが、 Web アプリケーションとしては実用品ではありません。実験的に作ったものです。その辺了承の上ご利用願います。

@@ -1,0 +1,16 @@
+!!! XML
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    = stylesheet_link_tag "http://ssig33.com/common.css"
+    %title 
+      Tumblr 2 ePub
+  %body
+    %div#all
+      %div
+        %h1 Convert Tumblr to ePub
+        - form_tag :action => :go do
+          %h2
+            =text_field_tag "tumblr_id"
+            \.tumblr.com
+            =submit_tag "Go!"

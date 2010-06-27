@@ -1,0 +1,23 @@
+!!! XML
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    = stylesheet_link_tag "http://ssig33.com/common.css"
+    %title 
+      ePubs converted from 
+      =h params[:id]
+  %body  
+  %div#all
+    %div
+      %h1=link_to  "Tumblr 2 ePub", "/"
+    %div
+      - if @job
+        %h2
+          = "this tumblelog \"#{params[:id]}\" is waiting for Crawl."
+      - if @epubs.size != 0
+        %div
+          %h2 
+            ePubs converted from
+            =h "#{params[:id]}.tumblr.com"
+          -@epubs.each do |e|
+            %p=link_to h("created at #{Time.at(e.created_at).to_s("sql")}"), "/#{e.name}"

@@ -1,0 +1,6 @@
+config/database.yml
+*.log
+*.pid
+tmp/*
+public/*.epub
+db/*.sqlite3
