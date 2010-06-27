@@ -122,7 +122,7 @@ HTML
             @downloads << [name,u["content"]]
             @photos << name
           end
-          @text = "<div style='max-height:90%'><img src='#{down}.png' /></div>"
+          @text = "<div style='max-height:90%'><img src='#{name}.png' /></div>"
         end
       end
       return {:title => nil, :text => @text}
