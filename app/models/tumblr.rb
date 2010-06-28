@@ -10,6 +10,7 @@ class Tumblr
         count = 0
         begin
           Entity.paginate("crawl_list", :page_size => 100)[0].each do |e|
+            puts "PROCESS #{e.target}.tumblr.com"
             name = create_epub(get_posts(e.target, 50))
             post = Entity.create("name" => name, "created_at" => Time.now.to_i)
             post.add_to_index "epubs/#{e.target}", Time.now.to_i
@@ -107,7 +108,9 @@ HTML
     filename = rand(256**16).to_s(16)
     e.save "public/#{filename}.epub"
     return "#{filename}.epub"
-    rescue
+    rescue => e
+      puts "Rescue create epub"
+      p e
     end
   end
 
@@ -131,7 +134,7 @@ HTML
       end
       return {:title => nil, :text => @text}
     elsif post["type"] == "regular"
-      return {:title => "<a href='#{post["url"]}'>#{post["regular-body"]}</a>", :text => post["regular-body"]}
+      return {:title => "<a href='#{post["url"]}'>#{post["regular-title"]}</a>", :text => post["regular-body"]}
     else 
       return nil
     end
