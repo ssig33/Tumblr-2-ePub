@@ -42,4 +42,6 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'view/:id', :controller => :home, :action => :view, :id => :id
   map.connect 'go/:id', :controller => :home, :action => :go, :id => :id
   map.connect 'what', :controller => :home, :action => :what
+  map.connect 'list', :controller => :home, :action => :list
+
 end

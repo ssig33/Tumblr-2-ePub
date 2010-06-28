@@ -12,8 +12,11 @@ class Tumblr
           Entity.paginate("crawl_list", :page_size => 100)[0].each do |e|
             puts "PROCESS #{e.target}.tumblr.com"
             name = create_epub(get_posts(e.target, 50))
-            post = Entity.create("name" => name, "created_at" => Time.now.to_i)
-            post.add_to_index "epubs/#{e.target}", Time.now.to_i
+            if name != nil and name != ""
+              post = Entity.create("name" => name, "created_at" => Time.now.to_i, "target" => e.target)
+              post.add_to_index "epubs/#{e.target}", Time.now.to_i
+              post.add_to_index "epubs_public", Time.now.to_i
+            end
             e.destroy
           end
           sleep 3

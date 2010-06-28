@@ -18,4 +18,12 @@ class HomeController < ApplicationController
       end
     end
   end
+
+  def list
+    @epubs = Entity.paginate("epubs_public", :page_size => 100)[0]
+    respond_to do |format|
+      format.html
+      format.atom
+    end
+  end
 end

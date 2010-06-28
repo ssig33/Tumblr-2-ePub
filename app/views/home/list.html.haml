@@ -1,0 +1,19 @@
+!!! XML
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    = stylesheet_link_tag "http://ssig33.com/common.css"
+    %title 
+      Recent ePubs converted from tumblr
+  %body  
+  %div#all
+    %div
+      %h1=link_to  "Tumblr 2 ePub", "/"
+    %div
+      %div
+        %h4=link_to "PodCast", :action => :list, :format => :atom
+        %h2 Recent ePubs converted from tumblr
+        -@epubs.each do |e|
+          %p
+            =link_to h(e.target), "/#{e.name}"
+            =h ("created at #{Time.at(e.created_at).to_s("sql")}")
