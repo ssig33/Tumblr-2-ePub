@@ -19,5 +19,7 @@
           %h2 
             ePubs converted from
             =h "#{params[:id]}.tumblr.com"
+          %h4
+            =link_to "PodCast", :action => :view, :id => params[:id], :format => :atom
           -@epubs.each do |e|
             %p=link_to h("created at #{Time.at(e.created_at).to_s("sql")}"), "/#{e.name}"

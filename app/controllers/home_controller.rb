@@ -7,6 +7,7 @@ class HomeController < ApplicationController
   end
 
   def view
+    redirect_to :action => :index if params[:id] == nil or params[:id] == ""
     @epubs ,@pager = Entity.paginate("epubs/#{params[:id]}")
     begin
       @job = Entity.find "job/crawl/#{params[:id]}"
@@ -17,10 +18,14 @@ class HomeController < ApplicationController
         @job = true
       end
     end
+    respond_to do |format|
+      format.html
+      format.atom
+    end
   end
 
   def list
-    @epubs = Entity.paginate("epubs_public", :page_size => 100)[0]
+    @epubs = Entity.paginate("epubs_public", :page_size => 15)[0]
     respond_to do |format|
       format.html
       format.atom
